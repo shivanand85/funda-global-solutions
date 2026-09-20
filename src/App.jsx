@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import CfdCalculator from "./pages/CfdCalculator";
 import CfdTools from "./pages/CfdTools";
 import EngineeringReportGenerator from "./pages/EngineeringReportGenerator";
+import YPlusCalculator from "./pages/YPlusCalculator";
+import YPlusEngineeringReport from "./pages/YPlusEngineeringReport";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/cfd-tools" element={<CfdTools />} />
         <Route path="/cfd-calculator" element={<CfdCalculator />} />
         <Route path="/engineering-report" element={<EngineeringReportGenerator />} />
+        <Route path="/yplus-calculator" element={<YPlusCalculator />} />
+        <Route path="/yplus-engineering-report" element={<YPlusEngineeringReport />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>
