@@ -1224,132 +1224,256 @@ Hydraulic Power: ${result.hydraulicPower} W
           </section>
 
 
-          {/* NEXT ENGINEERING TOOLS */}
-          <section className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="border-b border-slate-100 px-5 py-4">
-              <p className="text-xs font-bold uppercase tracking-[.22em] text-cyan-700">
-                Next Engineering Tools
-              </p>
-
-              <h2 className="mt-1 text-xl font-black text-slate-900">
-                Continue your engineering calculation
-              </h2>
-
-              <p className="mt-1 text-sm text-slate-500">
-                Move from fluid-flow analysis to heat transfer and CFD mesh planning.
-              </p>
-            </div>
-
-            <div className="relative px-5 py-5">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-white via-white/90 to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-white via-white/90 to-transparent" />
-
-              <div className="engineering-tools-window">
-                <div className="engineering-tools-track">
-                  {[0, 1].map((groupIndex) => (
-                    <div
-                      key={groupIndex}
-                      className="engineering-tools-group"
-                      aria-hidden={groupIndex === 1}
-                    >
-                      {/* NUSSELT */}
-                      <button
-                        type="button"
-                        onClick={() => navigate("/nusselt-calculator")}
-                        className="engineering-tool-card group border-orange-200 bg-orange-50/60 hover:border-orange-400 hover:bg-orange-50"
-                      >
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
-                          <Thermometer size={21} />
-                        </div>
-
-                        <div className="min-w-0 flex-1 text-left">
-                          <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
-                            Heat Transfer
-                          </p>
-
-                          <h3 className="mt-1 text-base font-black text-slate-900">
-                            Nusselt Number
-                          </h3>
-
-                          <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
-                            Calculate Nu and convective heat-transfer coefficient.
-                          </p>
-                        </div>
-
-                        <ArrowRight
-                          size={18}
-                          className="shrink-0 text-orange-500 transition-transform group-hover:translate-x-1"
-                        />
-                      </button>
-
-                      {/* PRANDTL */}
-                      <button
-                        type="button"
-                        onClick={() => navigate("/prandtl-calculator")}
-                        className="engineering-tool-card group border-violet-200 bg-violet-50/60 hover:border-violet-400 hover:bg-violet-50"
-                      >
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600">
-                          <Waves size={21} />
-                        </div>
-
-                        <div className="min-w-0 flex-1 text-left">
-                          <p className="text-xs font-bold uppercase tracking-wider text-violet-600">
-                            Fluid Properties
-                          </p>
-
-                          <h3 className="mt-1 text-base font-black text-slate-900">
-                            Prandtl Number
-                          </h3>
-
-                          <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
-                            Calculate Pr from viscosity, Cp and thermal conductivity.
-                          </p>
-                        </div>
-
-                        <ArrowRight
-                          size={18}
-                          className="shrink-0 text-violet-500 transition-transform group-hover:translate-x-1"
-                        />
-                      </button>
-
-                      {/* Y+ */}
-                      <button
-                        type="button"
-                        onClick={() => navigate("/yplus-calculator")}
-                        className="engineering-tool-card group border-cyan-200 bg-cyan-50/60 hover:border-cyan-400 hover:bg-cyan-50"
-                      >
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
-                          <Target size={21} />
-                        </div>
-
-                        <div className="min-w-0 flex-1 text-left">
-                          <p className="text-xs font-bold uppercase tracking-wider text-cyan-700">
-                            CFD Meshing
-                          </p>
-
-                          <h3 className="mt-1 text-base font-black text-slate-900">
-                            Y+ & First-Cell Height
-                          </h3>
-
-                          <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
-                            Estimate first-layer mesh height for CFD wall treatment.
-                          </p>
-                        </div>
-
-                        <ArrowRight
-                          size={18}
-                          className="shrink-0 text-cyan-600 transition-transform group-hover:translate-x-1"
-                        />
-                      </button>
-
-
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
+         /* =========================================================
+             Next Engineering Tools
+             ========================================================= */
+          
+          .engineering-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+          }
+          
+          
+          /* ---------------------------------------------------------
+             Card
+             --------------------------------------------------------- */
+          
+          .engineering-tool-card {
+            position: relative;
+          
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          
+            width: 100%;
+            min-height: 245px;
+          
+            padding: 20px;
+          
+            border: 1px solid;
+            border-radius: 18px;
+          
+            text-align: left;
+          
+            cursor: pointer;
+          
+            transition:
+              transform 0.2s ease,
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+          }
+          
+          .engineering-tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+          }
+          
+          .engineering-tool-card:focus-visible {
+            outline: 3px solid rgba(8, 145, 178, 0.25);
+            outline-offset: 2px;
+          }
+          
+          
+          /* ---------------------------------------------------------
+             Icon
+             --------------------------------------------------------- */
+          
+          .engineering-tool-icon {
+            display: flex;
+          
+            width: 46px;
+            height: 46px;
+          
+            align-items: center;
+            justify-content: center;
+          
+            margin-bottom: 18px;
+          
+            border-radius: 13px;
+          }
+          
+          
+          /* ---------------------------------------------------------
+             Content
+             --------------------------------------------------------- */
+          
+          .engineering-tool-content {
+            display: flex;
+            flex-direction: column;
+          
+            width: 100%;
+            height: 100%;
+          }
+          
+          .engineering-tool-category {
+            margin: 0 0 5px;
+          
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+          }
+          
+          .engineering-tool-content h3 {
+            margin: 0;
+          
+            font-size: 20px;
+            line-height: 1.25;
+            font-weight: 900;
+          
+            color: #0f172a;
+          }
+          
+          .engineering-tool-content > p:not(.engineering-tool-category) {
+            margin: 10px 0 0;
+          
+            font-size: 13px;
+            line-height: 1.6;
+          
+            color: #64748b;
+          }
+          
+          
+          /* ---------------------------------------------------------
+             Open calculator link
+             --------------------------------------------------------- */
+          
+          .engineering-tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+          
+            margin-top: auto;
+            padding-top: 20px;
+          
+            font-size: 13px;
+            font-weight: 800;
+          }
+          
+          
+          /* =========================================================
+             Orange — Nusselt
+             ========================================================= */
+          
+          .engineering-tool-orange {
+            border-color: #fed7aa;
+            background: linear-gradient(
+              145deg,
+              #fff7ed 0%,
+              #ffffff 100%
+            );
+          }
+          
+          .engineering-tool-orange:hover {
+            border-color: #fb923c;
+          }
+          
+          .engineering-tool-orange .engineering-tool-icon {
+            background: #ffedd5;
+            color: #ea580c;
+          }
+          
+          .engineering-tool-orange .engineering-tool-category {
+            color: #ea580c;
+          }
+          
+          .engineering-tool-orange .engineering-tool-link {
+            color: #ea580c;
+          }
+          
+          
+          /* =========================================================
+             Violet — Prandtl
+             ========================================================= */
+          
+          .engineering-tool-violet {
+            border-color: #ddd6fe;
+            background: linear-gradient(
+              145deg,
+              #f5f3ff 0%,
+              #ffffff 100%
+            );
+          }
+          
+          .engineering-tool-violet:hover {
+            border-color: #a78bfa;
+          }
+          
+          .engineering-tool-violet .engineering-tool-icon {
+            background: #ede9fe;
+            color: #7c3aed;
+          }
+          
+          .engineering-tool-violet .engineering-tool-category {
+            color: #7c3aed;
+          }
+          
+          .engineering-tool-violet .engineering-tool-link {
+            color: #7c3aed;
+          }
+          
+          
+          /* =========================================================
+             Cyan — Y+
+             ========================================================= */
+          
+          .engineering-tool-cyan {
+            border-color: #a5f3fc;
+            background: linear-gradient(
+              145deg,
+              #ecfeff 0%,
+              #ffffff 100%
+            );
+          }
+          
+          .engineering-tool-cyan:hover {
+            border-color: #22d3ee;
+          }
+          
+          .engineering-tool-cyan .engineering-tool-icon {
+            background: #cffafe;
+            color: #0891b2;
+          }
+          
+          .engineering-tool-cyan .engineering-tool-category {
+            color: #0891b2;
+          }
+          
+          .engineering-tool-cyan .engineering-tool-link {
+            color: #0891b2;
+          }
+          
+          
+          /* =========================================================
+             Tablet
+             ========================================================= */
+          
+          @media (max-width: 900px) {
+            .engineering-tools-grid {
+              grid-template-columns: 1fr;
+            }
+          
+            .engineering-tool-card {
+              min-height: 190px;
+            }
+          }
+          
+          
+          /* =========================================================
+             Mobile
+             ========================================================= */
+          
+          @media (max-width: 480px) {
+            .engineering-tool-card {
+              min-height: 210px;
+              padding: 18px;
+            }
+          
+            .engineering-tool-content h3 {
+              font-size: 18px;
+            }
+          }
         </div>
       </main>
 
