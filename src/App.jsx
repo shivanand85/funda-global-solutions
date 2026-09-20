@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -49,6 +50,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
 
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
