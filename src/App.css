@@ -227,3 +227,69 @@
     break-after: avoid;
   }
 }
+
+/* Engineering Tools Carousel */
+
+.engineering-tools-track {
+  display: flex;
+  width: max-content;
+  animation: engineeringToolsScroll 28s linear infinite;
+}
+
+.engineering-tools-track:hover {
+  animation-play-state: paused;
+}
+
+.engineering-tools-group {
+  display: flex;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.engineering-tool-card {
+  display: flex;
+  width: 360px;
+  min-height: 118px;
+  align-items: center;
+  gap: 1rem;
+  border-width: 1px;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: left;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.engineering-tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+@keyframes engineeringToolsScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .engineering-tools-track {
+    animation-duration: 22s;
+  }
+
+  .engineering-tool-card {
+    width: 300px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engineering-tools-track {
+    animation: none;
+  }
+}
