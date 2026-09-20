@@ -454,7 +454,7 @@ export default function NusseltCalculator() {
                 Funda Engineering Tools
               </p>
               <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
-                Nusselt Number / Convective Heat Transfer Calculator
+                Nusselt Number Calculator
               </h1>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
                 Calculate Nusselt number and estimate the convective heat transfer coefficient for internal and external flows.
