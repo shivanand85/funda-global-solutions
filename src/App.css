@@ -240,10 +240,15 @@
 
 .engineering-tools-track {
   display: flex;
-  width: max-content;
   flex-wrap: nowrap;
+  width: max-content;
+  min-width: max-content;
   will-change: transform;
   animation: engineeringToolsScroll 30s linear infinite;
+}
+
+.engineering-tools-track:hover {
+  animation-play-state: paused;
 }
 
 .engineering-tools-group {
@@ -258,10 +263,37 @@
   display: flex;
   flex: 0 0 360px;
   width: 360px;
+  min-width: 360px;
   min-height: 118px;
-  ...
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 16px;
+
+  padding: 16px;
+  text-align: left;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
+.engineering-tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+/*
+  The Friction Factor calculator renders two identical
+  engineering-tool groups.
+
+  Moving the track by 50% therefore creates a seamless loop.
+*/
 @keyframes engineeringToolsScroll {
   from {
     transform: translate3d(0, 0, 0);
@@ -269,5 +301,27 @@
 
   to {
     transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Tablet / mobile */
+@media (max-width: 768px) {
+  .engineering-tools-track {
+    animation-duration: 24s;
+  }
+
+  .engineering-tool-card {
+    flex-basis: 300px;
+    width: 300px;
+    min-width: 300px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .engineering-tool-card {
+    flex-basis: 285px;
+    width: 285px;
+    min-width: 285px;
   }
 }
