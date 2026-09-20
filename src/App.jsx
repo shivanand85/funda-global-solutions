@@ -15,6 +15,7 @@ import YPlusEngineeringReport from "./pages/YPlusEngineeringReport";
 import NusseltCalculator from "./pages/NusseltCalculator";
 import NusseltEngineeringReport from "./pages/NusseltEngineeringReport";
 import PrandtlCalculator from "./pages/PrandtlCalculator";
+import FrictionFactorCalculator from "./pages/FrictionFactorCalculator";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/nusselt-calculator" element={<NusseltCalculator />} />
         <Route path="/nusselt-engineering-report" element={<NusseltEngineeringReport />} />
         <Route path="/prandtl-calculator" element={<PrandtlCalculator />} />
+        <Route path="/friction-factor-calculator" element={<FrictionFactorCalculator />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>
