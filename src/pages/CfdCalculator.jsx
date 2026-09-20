@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Info,
   Calculator,
+  FileText,
 } from "lucide-react";
 
 /*
@@ -1428,6 +1429,8 @@ function FieldView({
 ------------------------------------------------------------------------ */
 
 export default function CfdCalculator() {
+  const navigate = useNavigate();
+
   const [form, setForm] =
     useState({
       fluid: "air",
@@ -1636,6 +1639,128 @@ export default function CfdCalculator() {
       [event.target.name]:
         event.target.value,
     }));
+  };
+
+  /* ---------------------------------------------------------------------
+     Engineering report
+  --------------------------------------------------------------------- */
+
+  const generateEngineeringReport = () => {
+    if (!rows.length || !first || !last) {
+      window.alert(
+        "Please enter valid inputs and calculate the results before generating the engineering report."
+      );
+      return;
+    }
+
+    const reportData = {
+      projectName:
+        "Rectangular Channel Pre-CFD Study",
+
+      clientName:
+        "Funda Global Solutions",
+
+      engineer: "",
+
+      date:
+        new Date()
+          .toISOString()
+          .slice(0, 10),
+
+      fluid:
+        input.fluidName ||
+        fluidNames[input.fluid],
+
+      geometry: {
+        length: input.length,
+        width: input.width * 1000,
+        height: input.height * 1000,
+        area: first.area ?? 0,
+        hydraulicDiameter:
+          first.hydraulicDiameter ?? 0,
+        aspectRatio:
+          first.aspectRatio ?? 0,
+      },
+
+      operating: {
+        inletTemperature:
+          input.inletTemp,
+        pressureKPaAbs:
+          input.pressureKPaAbs,
+        heatLoad: input.heatLoad,
+        minVelocity: input.minVelocity,
+        maxVelocity: input.maxVelocity,
+      },
+
+      properties: {
+        density:
+          first.density ?? input.density,
+        viscosity:
+          first.viscosity ?? input.viscosity,
+        cp: first.cp ?? input.cp,
+      },
+
+      model: {
+        correlation: input.correlation,
+        roughness: input.roughnessMm,
+      },
+
+      summary: {
+        pressureDropMin:
+          first.pressure ?? null,
+        pressureDropMax:
+          last.pressure ?? null,
+        reynoldsMin:
+          first.reynolds ?? null,
+        reynoldsMax:
+          last.reynolds ?? null,
+        massFlowMin:
+          first.massFlow ?? null,
+        massFlowMax:
+          last.massFlow ?? null,
+        outletTemperatureMin:
+          first.outletTemperature ?? null,
+        outletTemperatureMax:
+          last.outletTemperature ?? null,
+        frictionFactorMin:
+          first.friction ?? null,
+        frictionFactorMax:
+          last.friction ?? null,
+        flowRegime:
+          first.regime ?? "N/A",
+      },
+
+      rows,
+      warnings,
+
+      assumptions: [
+        "1-D rectangular-channel pressure-loss model.",
+        "Hydraulic diameter is used for Reynolds number and turbulent correlations.",
+        "No-slip wall condition is assumed.",
+        "The specified heat load is applied through a simplified energy balance.",
+        "Fluid properties are calculated using the selected screening model.",
+        "Conceptual field graphics are not CFD solutions.",
+        "Final engineering design should be validated using appropriate CFD, experimental data, standards and engineering review.",
+      ],
+    };
+
+    try {
+      localStorage.setItem(
+        "funda-cfd-report",
+        JSON.stringify(reportData)
+      );
+
+      navigate("/engineering-report");
+    } catch (error) {
+      console.error(
+        "Unable to save engineering report:",
+        error
+      );
+
+      window.alert(
+        "Unable to create the engineering report. Please try again."
+      );
+    }
   };
 
   /* ---------------------------------------------------------------------
@@ -2652,6 +2777,17 @@ export default function CfdCalculator() {
                     />
 
                     Share summary
+                  </button>
+
+                  <button
+                    onClick={generateEngineeringReport}
+                    className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-3 font-semibold text-slate-950 transition hover:bg-cyan-300"
+                  >
+                    <FileText
+                      size={18}
+                    />
+
+                    Engineering Report
                   </button>
                 </div>
 
