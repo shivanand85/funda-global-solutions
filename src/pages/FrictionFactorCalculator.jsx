@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import {
   AlertTriangle,
+  ArrowRight,
   CheckCircle2,
   Copy,
   Download,
@@ -8,6 +9,8 @@ import {
   Gauge,
   Info,
   RotateCcw,
+  Target,
+  Thermometer,
   Waves,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import ContactCTA from "../components/ContactCTA/ContactCTA";
 import Footer from "../components/Footer/Footer";
+import MoodyChart from "../components/MoodyChart/MoodyChart";
 
 const PIPE_PRESETS = {
   smooth: {
@@ -154,11 +158,24 @@ function frictionFactor(re, relativeRoughness, method) {
     return 64 / re;
   }
 
-  if (method === "swameeJain") {
-    return swameeJain(re, relativeRoughness);
+  if (re < 4000) {
+    return colebrookWhite(
+      4000,
+      relativeRoughness
+    );
   }
 
-  return colebrookWhite(re, relativeRoughness);
+  if (method === "swameeJain") {
+    return swameeJain(
+      re,
+      relativeRoughness
+    );
+  }
+
+  return colebrookWhite(
+    re,
+    relativeRoughness
+  );
 }
 
 function formatNumber(value, digits = 4) {
@@ -537,21 +554,33 @@ Hydraulic Power: ${result.hydraulicPower} W
 
             {/* INPUT CARD */}
             <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="mb-5 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700">
-                  <Gauge size={20} />
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700">
+                    <Gauge size={20} />
+                  </div>
+              
+                  <div>
+                    <h2 className="font-bold">
+                      Flow & Pipe Inputs
+                    </h2>
+              
+                    <p className="text-xs text-slate-500">
+                      Enter SI-unit pipe and fluid properties.
+                    </p>
+                  </div>
                 </div>
-
-                <div>
-                  <h2 className="font-bold">
-                    Flow & Pipe Inputs
-                  </h2>
-
-                  <p className="text-xs text-slate-500">
-                    Enter SI-unit pipe and fluid properties.
-                  </p>
-                </div>
+              
+                <button
+                  type="button"
+                  onClick={resetCalculator}
+                  className="inline-flex shrink-0 items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
+                >
+                  <RotateCcw size={17} />
+                  Reset
+                </button>
               </div>
+
 
               {/* PIPE MATERIAL */}
               <label className="mb-1 block text-sm font-semibold text-slate-700">
@@ -973,6 +1002,12 @@ Hydraulic Power: ${result.hydraulicPower} W
                     </div>
                   </div>
 
+                  <MoodyChart
+                    reynolds={result.reynolds}
+                    frictionFactor={result.f}
+                    relativeRoughness={result.relativeRoughness}
+                  />
+
                   {/* MOODY INDICATOR */}
                   <div className="mt-5 rounded-xl border border-slate-200 p-4">
                     <div className="flex items-center justify-between gap-3">
@@ -1188,25 +1223,235 @@ Hydraulic Power: ${result.hydraulicPower} W
             </div>
           </section>
 
-          {/* ACTIONS */}
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button
-              onClick={resetCalculator}
-              className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 hover:bg-slate-50"
-            >
-              <RotateCcw size={17} />
-              Reset
-            </button>
 
-            <button
-              onClick={() =>
-                navigate("/nusselt-calculator")
-              }
-              className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-800"
-            >
-              Continue to Nusselt Calculator
-            </button>
-          </div>
+          {/* NEXT ENGINEERING TOOLS */}
+          <section className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-100 px-5 py-4">
+              <p className="text-xs font-bold uppercase tracking-[.22em] text-cyan-700">
+                Next Engineering Tools
+              </p>
+          
+              <h2 className="mt-1 text-xl font-black text-slate-900">
+                Continue your engineering calculation
+              </h2>
+          
+              <p className="mt-1 text-sm text-slate-500">
+                Move from fluid-flow analysis to heat transfer and CFD mesh planning.
+              </p>
+            </div>
+          
+            <div className="relative overflow-hidden px-5 py-5">
+          
+              {/* LEFT FADE */}
+              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-10 bg-gradient-to-r from-white to-transparent" />
+          
+              {/* RIGHT FADE */}
+              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-10 bg-gradient-to-l from-white to-transparent" />
+          
+              <div className="engineering-tools-track">
+          
+                {/* ORIGINAL SET */}
+                <div className="engineering-tools-group">
+          
+                  {/* NUSSELT */}
+                  <button
+                    onClick={() =>
+                      navigate("/nusselt-calculator")
+                    }
+                    className="engineering-tool-card group border-orange-200 bg-orange-50/60 hover:border-orange-400 hover:bg-orange-50"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
+                      <Thermometer size={21} />
+                    </div>
+          
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
+                        Heat Transfer
+                      </p>
+          
+                      <h3 className="mt-1 text-base font-black text-slate-900">
+                        Nusselt Number
+                      </h3>
+          
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
+                        Calculate Nu and convective heat-transfer coefficient.
+                      </p>
+                    </div>
+          
+                    <ArrowRight
+                      size={18}
+                      className="shrink-0 text-orange-500 transition-transform group-hover:translate-x-1"
+                    />
+                  </button>
+          
+                  {/* PRANDTL */}
+                  <button
+                    onClick={() =>
+                      navigate("/prandtl-calculator")
+                    }
+                    className="engineering-tool-card group border-violet-200 bg-violet-50/60 hover:border-violet-400 hover:bg-violet-50"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600">
+                      <Waves size={21} />
+                    </div>
+          
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-xs font-bold uppercase tracking-wider text-violet-600">
+                        Fluid Properties
+                      </p>
+          
+                      <h3 className="mt-1 text-base font-black text-slate-900">
+                        Prandtl Number
+                      </h3>
+          
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
+                        Calculate Pr from viscosity, Cp and thermal conductivity.
+                      </p>
+                    </div>
+          
+                    <ArrowRight
+                      size={18}
+                      className="shrink-0 text-violet-500 transition-transform group-hover:translate-x-1"
+                    />
+                  </button>
+          
+                  {/* Y+ */}
+                  <button
+                    onClick={() =>
+                      navigate("/yplus-calculator")
+                    }
+                    className="engineering-tool-card group border-cyan-200 bg-cyan-50/60 hover:border-cyan-400 hover:bg-cyan-50"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
+                      <Target size={21} />
+                    </div>
+          
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-xs font-bold uppercase tracking-wider text-cyan-700">
+                        CFD Meshing
+                      </p>
+          
+                      <h3 className="mt-1 text-base font-black text-slate-900">
+                        Y+ & First-Cell Height
+                      </h3>
+          
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
+                        Estimate first-layer mesh height for CFD wall treatment.
+                      </p>
+                    </div>
+          
+                    <ArrowRight
+                      size={18}
+                      className="shrink-0 text-cyan-600 transition-transform group-hover:translate-x-1"
+                    />
+                  </button>
+          
+                </div>
+          
+                {/* DUPLICATE SET FOR SEAMLESS LOOP */}
+                <div
+                  className="engineering-tools-group"
+                  aria-hidden="true"
+                >
+          
+                  {/* NUSSELT */}
+                  <button
+                    onClick={() =>
+                      navigate("/nusselt-calculator")
+                    }
+                    className="engineering-tool-card group border-orange-200 bg-orange-50/60 hover:border-orange-400 hover:bg-orange-50"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
+                      <Thermometer size={21} />
+                    </div>
+          
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
+                        Heat Transfer
+                      </p>
+          
+                      <h3 className="mt-1 text-base font-black text-slate-900">
+                        Nusselt Number
+                      </h3>
+          
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
+                        Calculate Nu and convective heat-transfer coefficient.
+                      </p>
+                    </div>
+          
+                    <ArrowRight
+                      size={18}
+                      className="shrink-0 text-orange-500"
+                    />
+                  </button>
+          
+                  {/* PRANDTL */}
+                  <button
+                    onClick={() =>
+                      navigate("/prandtl-calculator")
+                    }
+                    className="engineering-tool-card group border-violet-200 bg-violet-50/60 hover:border-violet-400 hover:bg-violet-50"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-100 text-violet-600">
+                      <Waves size={21} />
+                    </div>
+          
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-xs font-bold uppercase tracking-wider text-violet-600">
+                        Fluid Properties
+                      </p>
+          
+                      <h3 className="mt-1 text-base font-black text-slate-900">
+                        Prandtl Number
+                      </h3>
+          
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
+                        Calculate Pr from viscosity, Cp and thermal conductivity.
+                      </p>
+                    </div>
+          
+                    <ArrowRight
+                      size={18}
+                      className="shrink-0 text-violet-500"
+                    />
+                  </button>
+          
+                  {/* Y+ */}
+                  <button
+                    onClick={() =>
+                      navigate("/yplus-calculator")
+                    }
+                    className="engineering-tool-card group border-cyan-200 bg-cyan-50/60 hover:border-cyan-400 hover:bg-cyan-50"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
+                      <Target size={21} />
+                    </div>
+          
+                    <div className="min-w-0 flex-1 text-left">
+                      <p className="text-xs font-bold uppercase tracking-wider text-cyan-700">
+                        CFD Meshing
+                      </p>
+          
+                      <h3 className="mt-1 text-base font-black text-slate-900">
+                        Y+ & First-Cell Height
+                      </h3>
+          
+                      <p className="mt-1 line-clamp-2 text-xs leading-5 text-slate-600">
+                        Estimate first-layer mesh height for CFD wall treatment.
+                      </p>
+                    </div>
+          
+                    <ArrowRight
+                      size={18}
+                      className="shrink-0 text-cyan-600"
+                    />
+                  </button>
+          
+                </div>
+              </div>
+            </div>
+          </section>
+          
 
         </div>
       </main>
