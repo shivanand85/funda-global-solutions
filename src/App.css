@@ -228,12 +228,22 @@
   }
 }
 
-/* Engineering Tools Carousel */
+/* =========================================================
+   Engineering Tools Infinite Carousel
+   ========================================================= */
+
+.engineering-tools-window {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 
 .engineering-tools-track {
   display: flex;
   width: max-content;
-  animation: engineeringToolsScroll 28s linear infinite;
+  flex-wrap: nowrap;
+  will-change: transform;
+  animation: engineeringToolsScroll 30s linear infinite;
 }
 
 .engineering-tools-track:hover {
@@ -242,20 +252,25 @@
 
 .engineering-tools-group {
   display: flex;
-  gap: 1rem;
-  padding-right: 1rem;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 16px;
+  padding-right: 16px;
 }
 
 .engineering-tool-card {
   display: flex;
+  flex: 0 0 360px;
   width: 360px;
   min-height: 118px;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
   border-width: 1px;
-  border-radius: 1rem;
-  padding: 1rem;
+  border-radius: 16px;
+  padding: 16px;
   text-align: left;
+  box-sizing: border-box;
+
   transition:
     transform 0.25s ease,
     border-color 0.25s ease,
@@ -268,22 +283,26 @@
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
 }
 
+/* IMPORTANT:
+   Move exactly one complete group.
+*/
 @keyframes engineeringToolsScroll {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @media (max-width: 768px) {
   .engineering-tools-track {
-    animation-duration: 22s;
+    animation-duration: 24s;
   }
 
   .engineering-tool-card {
+    flex-basis: 300px;
     width: 300px;
   }
 }
