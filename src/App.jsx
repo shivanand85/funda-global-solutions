@@ -12,6 +12,8 @@ import CfdTools from "./pages/CfdTools";
 import EngineeringReportGenerator from "./pages/EngineeringReportGenerator";
 import YPlusCalculator from "./pages/YPlusCalculator";
 import YPlusEngineeringReport from "./pages/YPlusEngineeringReport";
+import NusseltCalculator from "./pages/NusseltCalculator";
+import NusseltEngineeringReport from "./pages/NusseltEngineeringReport";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/engineering-report" element={<EngineeringReportGenerator />} />
         <Route path="/yplus-calculator" element={<YPlusCalculator />} />
         <Route path="/yplus-engineering-report" element={<YPlusEngineeringReport />} />
+        <Route path="/nusselt-calculator" element={<NusseltCalculator />} />
+        <Route path="/nusselt-engineering-report" element={<NusseltEngineeringReport />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>
