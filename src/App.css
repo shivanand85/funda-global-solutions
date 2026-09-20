@@ -228,3 +228,173 @@
   }
 }
 
+/* =========================================================
+   Next Engineering Tools
+   ========================================================= */
+
+.engineering-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.engineering-tool-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+  min-height: 245px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  border: 1px solid;
+  border-radius: 18px;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.engineering-tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+}
+
+.engineering-tool-card:focus-visible {
+  outline: 3px solid rgba(8, 145, 178, 0.25);
+  outline-offset: 2px;
+}
+
+.engineering-tool-icon {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  border-radius: 13px;
+}
+
+.engineering-tool-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.engineering-tool-category {
+  margin: 0 0 5px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.engineering-tool-content h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.engineering-tool-content > p:not(.engineering-tool-category) {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.engineering-tool-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 20px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.engineering-tool-orange {
+  border-color: #fed7aa;
+  background: linear-gradient(145deg, #fff7ed 0%, #ffffff 100%);
+}
+
+.engineering-tool-orange:hover {
+  border-color: #fb923c;
+}
+
+.engineering-tool-orange .engineering-tool-icon {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.engineering-tool-orange .engineering-tool-category,
+.engineering-tool-orange .engineering-tool-link {
+  color: #ea580c;
+}
+
+.engineering-tool-violet {
+  border-color: #ddd6fe;
+  background: linear-gradient(145deg, #f5f3ff 0%, #ffffff 100%);
+}
+
+.engineering-tool-violet:hover {
+  border-color: #a78bfa;
+}
+
+.engineering-tool-violet .engineering-tool-icon {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.engineering-tool-violet .engineering-tool-category,
+.engineering-tool-violet .engineering-tool-link {
+  color: #7c3aed;
+}
+
+.engineering-tool-cyan {
+  border-color: #a5f3fc;
+  background: linear-gradient(145deg, #ecfeff 0%, #ffffff 100%);
+}
+
+.engineering-tool-cyan:hover {
+  border-color: #22d3ee;
+}
+
+.engineering-tool-cyan .engineering-tool-icon {
+  background: #cffafe;
+  color: #0891b2;
+}
+
+.engineering-tool-cyan .engineering-tool-category,
+.engineering-tool-cyan .engineering-tool-link {
+  color: #0891b2;
+}
+
+@media (max-width: 900px) {
+  .engineering-tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .engineering-tool-card {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 480px) {
+  .engineering-tool-card {
+    min-height: 210px;
+    padding: 18px;
+  }
+
+  .engineering-tool-content h3 {
+    font-size: 18px;
+  }
+}
