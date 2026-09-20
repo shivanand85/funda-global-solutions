@@ -64,6 +64,61 @@ export default function CfdTools() {
               </span>
             </Link>
 
+            {/* Reynolds Number Calculator */}
+            <Link
+              to="/reynolds-calculator"
+              className="group rounded-3xl border border-blue-400/20 bg-slate-900/70 p-8 transition hover:-translate-y-1 hover:border-blue-400/60"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-400/10 text-blue-400">
+                <Gauge size={28} />
+              </div>
+
+              <h2 className="mt-7 text-2xl font-bold">
+                Reynolds Number Calculator
+              </h2>
+
+              <p className="mt-3 leading-7 text-slate-400">
+                Calculate Reynolds number, flow regime, kinematic viscosity
+                and derived flow quantities for pipe, duct and external flow.
+              </p>
+
+              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-blue-400">
+                Open tool
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </span>
+            </Link>
+
+            {/* Friction Factor / Moody Chart */}
+            <Link
+              to="/friction-factor-calculator"
+              className="group rounded-3xl border border-violet-400/20 bg-slate-900/70 p-8 transition hover:-translate-y-1 hover:border-violet-400/60"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-400">
+                <Gauge size={28} />
+              </div>
+
+              <h2 className="mt-7 text-2xl font-bold">
+                Friction Factor / Moody Chart
+              </h2>
+
+              <p className="mt-3 leading-7 text-slate-400">
+                Calculate Darcy friction factor, Reynolds number, pressure
+                drop and head loss using Colebrook–White and Swamee–Jain
+                correlations.
+              </p>
+
+              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-violet-400">
+                Open tool
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </span>
+            </Link>
+
             {/* Y+ Calculator */}
             <Link
               to="/yplus-calculator"
@@ -120,6 +175,7 @@ export default function CfdTools() {
               </span>
             </Link>
 
+            {/* Prandtl Number Calculator */}
             <Link
               to="/prandtl-calculator"
               className="group rounded-3xl border border-violet-400/20 bg-slate-900/70 p-8 transition hover:-translate-y-1 hover:border-violet-400/60"
@@ -127,43 +183,17 @@ export default function CfdTools() {
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-400">
                 <Gauge size={28} />
               </div>
-            
+
               <h2 className="mt-7 text-2xl font-bold">
                 Prandtl Number Calculator
               </h2>
-            
-              <p className="mt-3 leading-7 text-slate-400">
-                Calculate Prandtl number from viscosity, specific heat and thermal
-                conductivity, with thermal and momentum diffusivity results.
-              </p>
-            
-              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-violet-400">
-                Open tool
-                <ArrowRight
-                  size={18}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </span>
-            </Link>
 
-            <Link
-              to="/friction-factor-calculator"
-              className="group rounded-3xl border border-violet-400/20 bg-slate-900/70 p-8 transition hover:-translate-y-1 hover:border-violet-400/60"
-            >
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-400">
-                <Gauge size={28} />
-              </div>
-            
-              <h2 className="mt-7 text-2xl font-bold">
-                Friction Factor / Moody Chart
-              </h2>
-            
               <p className="mt-3 leading-7 text-slate-400">
-                Calculate Darcy friction factor, Reynolds number, pressure
-                drop and head loss using Colebrook–White and Swamee–Jain
-                correlations.
+                Calculate Prandtl number from viscosity, specific heat and
+                thermal conductivity, with thermal and momentum diffusivity
+                results.
               </p>
-            
+
               <span className="mt-7 inline-flex items-center gap-2 font-semibold text-violet-400">
                 Open tool
                 <ArrowRight
