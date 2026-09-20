@@ -1225,119 +1225,123 @@ Hydraulic Power: ${result.hydraulicPower} W
 
 
           {/* NEXT ENGINEERING TOOLS */}
-          <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          {/* NEXT ENGINEERING TOOLS */}
+          <section className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+          
             <div className="mb-5">
-              <p className="text-xs font-bold uppercase tracking-[.22em] text-cyan-700">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-700">
                 Next Engineering Tools
               </p>
-
+          
               <h2 className="mt-1 text-xl font-black text-slate-900">
                 Continue your engineering calculation
               </h2>
-
+          
               <p className="mt-1 text-sm text-slate-500">
                 Move from fluid-flow analysis to heat transfer and CFD mesh planning.
               </p>
             </div>
-
-            <div className="engineering-tools-grid">
-
-              {/* NUSSELT NUMBER */}
+          
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          
+              {/* Nusselt Number */}
               <button
                 type="button"
                 onClick={() => navigate("/nusselt-calculator")}
-                className="engineering-tool-card engineering-tool-orange group"
+                className="group rounded-xl border border-slate-200 bg-slate-50 p-5 text-left transition hover:-translate-y-1 hover:border-orange-300 hover:bg-orange-50 hover:shadow-sm"
               >
-                <div className="engineering-tool-icon">
-                  <Thermometer size={22} />
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-orange-100 text-orange-600">
+                  <Thermometer size={21} />
                 </div>
-
-                <div className="engineering-tool-content">
-                  <p className="engineering-tool-category">
-                    Heat Transfer
-                  </p>
-
-                  <h3>Nusselt Number</h3>
-
-                  <p>
-                    Calculate Nu and convective heat-transfer coefficient.
-                  </p>
-
-                  <span className="engineering-tool-link">
-                    Open Calculator
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </span>
+          
+                <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
+                  Heat Transfer
+                </p>
+          
+                <h3 className="mt-1 text-lg font-bold text-slate-900">
+                  Nusselt Number
+                </h3>
+          
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  Calculate Nu and convective heat-transfer coefficient.
+                </p>
+          
+                <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-orange-600">
+                  Open Calculator
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </button>
-
-              {/* PRANDTL NUMBER */}
+          
+          
+              {/* Prandtl Number */}
               <button
                 type="button"
                 onClick={() => navigate("/prandtl-calculator")}
-                className="engineering-tool-card engineering-tool-violet group"
+                className="group rounded-xl border border-slate-200 bg-slate-50 p-5 text-left transition hover:-translate-y-1 hover:border-violet-300 hover:bg-violet-50 hover:shadow-sm"
               >
-                <div className="engineering-tool-icon">
-                  <Waves size={22} />
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-violet-100 text-violet-600">
+                  <Waves size={21} />
                 </div>
-
-                <div className="engineering-tool-content">
-                  <p className="engineering-tool-category">
-                    Fluid Properties
-                  </p>
-
-                  <h3>Prandtl Number</h3>
-
-                  <p>
-                    Calculate Pr from viscosity, Cp and thermal conductivity.
-                  </p>
-
-                  <span className="engineering-tool-link">
-                    Open Calculator
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </span>
+          
+                <p className="text-xs font-bold uppercase tracking-wider text-violet-600">
+                  Fluid Properties
+                </p>
+          
+                <h3 className="mt-1 text-lg font-bold text-slate-900">
+                  Prandtl Number
+                </h3>
+          
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  Calculate Pr from viscosity, Cp and thermal conductivity.
+                </p>
+          
+                <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-violet-600">
+                  Open Calculator
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </button>
-
-              {/* Y+ FIRST-CELL HEIGHT */}
+          
+          
+              {/* Y+ Calculator */}
               <button
                 type="button"
                 onClick={() => navigate("/yplus-calculator")}
-                className="engineering-tool-card engineering-tool-cyan group"
+                className="group rounded-xl border border-slate-200 bg-slate-50 p-5 text-left transition hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-50 hover:shadow-sm"
               >
-                <div className="engineering-tool-icon">
-                  <Target size={22} />
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-600">
+                  <Target size={21} />
                 </div>
-
-                <div className="engineering-tool-content">
-                  <p className="engineering-tool-category">
-                    CFD Meshing
-                  </p>
-
-                  <h3>Y+ &amp; First-Cell Height</h3>
-
-                  <p>
-                    Estimate first-layer mesh height for CFD wall treatment.
-                  </p>
-
-                  <span className="engineering-tool-link">
-                    Open Calculator
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </span>
+          
+                <p className="text-xs font-bold uppercase tracking-wider text-cyan-600">
+                  CFD Meshing
+                </p>
+          
+                <h3 className="mt-1 text-lg font-bold text-slate-900">
+                  Y+ & First-Cell Height
+                </h3>
+          
+                <p className="mt-2 text-sm leading-6 text-slate-500">
+                  Estimate first-layer mesh height for CFD wall treatment.
+                </p>
+          
+                <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-cyan-600">
+                  Open Calculator
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </button>
-
+          
             </div>
+          
           </section>
-
         </div>
       </main>
 
