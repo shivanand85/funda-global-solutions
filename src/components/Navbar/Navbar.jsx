@@ -21,6 +21,7 @@ export default function Navbar() {
     { name: "Home", path: "/" },
     { name: "Training", path: "/training" },
     { name: "Portfolio", path: "/portfolio" },
+    { name: "CFD Tools", path: "/cfd-tools" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];

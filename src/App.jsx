@@ -7,6 +7,8 @@ import Portfolio from "./pages/Portfolio";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import CfdCalculator from "./pages/CfdCalculator";
+import CfdTools from "./pages/CfdTools";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cfd-tools" element={<CfdTools />} />
+        <Route path="/cfd-calculator" element={<CfdCalculator />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>
