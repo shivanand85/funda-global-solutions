@@ -182,3 +182,48 @@
     border-right-color: var(--border);
   }
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    color: #0f172a !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  section {
+    break-inside: avoid;
+  }
+
+  table {
+    break-inside: auto;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}
