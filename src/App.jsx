@@ -24,8 +24,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/cfd-tools" element={<CfdTools />} />
         <Route path="/cfd-calculator" element={<CfdCalculator />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/engineering-report" element={<EngineeringReportGenerator />} />
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
     </BrowserRouter>
