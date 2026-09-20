@@ -15,6 +15,9 @@ import {
   FileText,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
+import ContactCTA from "../components/ContactCTA/ContactCTA";
+import Footer from "../components/Footer/Footer";
 
 /*
 |--------------------------------------------------------------------------
@@ -1988,7 +1991,10 @@ export default function CfdCalculator() {
       : null;
 
   return (
-    <main className="min-h-screen bg-slate-950 pt-28 pb-16 text-slate-100">
+    <>
+      <Navbar />
+
+      <main className="min-h-screen bg-slate-950 pt-28 pb-16 text-slate-100">
       <div className="mx-auto max-w-7xl px-6">
 
         {/* ---------------------------------------------------------------
@@ -2832,7 +2838,11 @@ export default function CfdCalculator() {
           safety-critical applications or certification.
         </div>
       </div>
-    </main>
+      </main>
+
+      <ContactCTA />
+      <Footer />
+    </>
   );
 }
 
