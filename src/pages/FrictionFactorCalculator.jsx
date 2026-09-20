@@ -1241,11 +1241,8 @@ Hydraulic Power: ${result.hydraulicPower} W
             </div>
 
             <div className="relative px-5 py-5">
-              {/* LEFT FADE */}
-              <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 bg-gradient-to-r from-white to-transparent" />
-
-              {/* RIGHT FADE */}
-              <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 bg-gradient-to-l from-white to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-white via-white/90 to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-white via-white/90 to-transparent" />
 
               <div className="engineering-tools-window">
                 <div className="engineering-tools-track">
@@ -1344,13 +1341,15 @@ Hydraulic Power: ${result.hydraulicPower} W
                           className="shrink-0 text-cyan-600 transition-transform group-hover:translate-x-1"
                         />
                       </button>
+
+
                     </div>
                   ))}
                 </div>
               </div>
             </div>
           </section>
-          
+
         </div>
       </main>
 
