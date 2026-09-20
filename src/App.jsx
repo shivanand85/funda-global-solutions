@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import CfdCalculator from "./pages/CfdCalculator";
 import CfdTools from "./pages/CfdTools";
+import EngineeringReportGenerator from "./pages/EngineeringReportGenerator";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/cfd-tools" element={<CfdTools />} />
         <Route path="/cfd-calculator" element={<CfdCalculator />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/engineering-report" element={<EngineeringReportGenerator />} />
 
       </Routes>
     </BrowserRouter>
