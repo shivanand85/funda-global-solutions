@@ -154,7 +154,7 @@ export default function MoodyChart({
   const laminarPoints = useMemo(() => {
     const points = [];
 
-    for (let re = 100; re <= 2300; re += 20) {
+    for (let re = 640; re <= 2300; re += 20) {
       const f = 64 / re;
 
       points.push({
@@ -219,13 +219,21 @@ export default function MoodyChart({
     const rect =
       event.currentTarget.getBoundingClientRect();
 
-    const svgX =
-      ((event.clientX - rect.left) / rect.width) *
-      width;
+    const svgX = Math.min(
+      width,
+      Math.max(
+        0,
+        ((event.clientX - rect.left) / rect.width) * width
+      )
+    );
 
-    const svgY =
-      ((event.clientY - rect.top) / rect.height) *
-      height;
+    const svgY = Math.min(
+      height,
+      Math.max(
+        0,
+        ((event.clientY - rect.top) / rect.height) * height
+      )
+    );
 
     if (
       svgX < margin.left ||
@@ -302,12 +310,28 @@ export default function MoodyChart({
         <div className="min-w-[720px]">
           <svg
             viewBox={`0 0 ${width} ${height}`}
-            className="h-auto w-full"
+            className="h-auto w-full cursor-crosshair select-none"
             role="img"
             aria-label="Interactive Moody diagram"
             onMouseMove={handleMouseMove}
             onMouseLeave={() => setHover(null)}
           >
+            <defs>
+              <clipPath id="moodyPlotClip">
+                <rect
+                  x={margin.left}
+                  y={margin.top}
+                  width={plotWidth}
+                  height={plotHeight}
+                  rx="8"
+                />
+              </clipPath>
+
+              <linearGradient id="moodyPlotGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#f8fafc" />
+                <stop offset="100%" stopColor="#ffffff" />
+              </linearGradient>
+            </defs>
 
             {/* BACKGROUND */}
             <rect
@@ -316,7 +340,7 @@ export default function MoodyChart({
               width={plotWidth}
               height={plotHeight}
               rx="8"
-              fill="#f8fafc"
+              fill="url(#moodyPlotGradient)"
               stroke="#cbd5e1"
             />
 
@@ -376,46 +400,119 @@ export default function MoodyChart({
               );
             })}
 
-            {/* LAMINAR CURVE */}
-            <polyline
-              points={pointString(laminarPoints)}
-              fill="none"
-              stroke="#0284c7"
-              strokeWidth="3"
-            />
+            {/* PLOT CONTENT — CLIPPED TO THE MOODY PLOT AREA */}
+            <g clipPath="url(#moodyPlotClip)">
+              {/* TRANSITIONAL REGION */}
+              <rect
+                x={xScale(2300)}
+                y={margin.top}
+                width={
+                  xScale(4000) -
+                  xScale(2300)
+                }
+                height={plotHeight}
+                fill="#f59e0b"
+                opacity="0.08"
+              />
 
-            {/* TURBULENT CURVES */}
-            {turbulentCurves.map(
-              (curve, index) => (
-                <polyline
-                  key={curve.label}
-                  points={pointString(
-                    curve.points
-                  )}
-                  fill="none"
-                  stroke={
-                    index % 2 === 0
-                      ? "#475569"
-                      : "#64748b"
-                  }
-                  strokeWidth="2"
-                  opacity="0.9"
-                />
-              )
-            )}
+              {/* LAMINAR CURVE */}
+              <polyline
+                points={pointString(laminarPoints)}
+                fill="none"
+                stroke="#0284c7"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
 
-            {/* TRANSITIONAL REGION */}
-            <rect
-              x={xScale(2300)}
-              y={margin.top}
-              width={
-                xScale(4000) -
-                xScale(2300)
-              }
-              height={plotHeight}
-              fill="#f59e0b"
-              opacity="0.08"
-            />
+              {/* TURBULENT CURVES */}
+              {turbulentCurves.map(
+                (curve, index) => (
+                  <polyline
+                    key={curve.label}
+                    points={pointString(curve.points)}
+                    fill="none"
+                    stroke={
+                      index % 2 === 0
+                        ? "#475569"
+                        : "#64748b"
+                    }
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.9"
+                  />
+                )
+              )}
+
+              {/* USER CALCULATION */}
+              {selectedPoint && (
+                <>
+                  <line
+                    x1={selectedPoint.x}
+                    x2={selectedPoint.x}
+                    y1={margin.top}
+                    y2={margin.top + plotHeight}
+                    stroke="#7c3aed"
+                    strokeWidth="1.5"
+                    strokeDasharray="6 5"
+                    opacity="0.7"
+                  />
+
+                  <line
+                    x1={margin.left}
+                    x2={margin.left + plotWidth}
+                    y1={selectedPoint.y}
+                    y2={selectedPoint.y}
+                    stroke="#7c3aed"
+                    strokeWidth="1.5"
+                    strokeDasharray="6 5"
+                    opacity="0.7"
+                  />
+
+                  <circle
+                    cx={selectedPoint.x}
+                    cy={selectedPoint.y}
+                    r="9"
+                    fill="#ffffff"
+                    stroke="#7c3aed"
+                    strokeWidth="4"
+                  />
+
+                  <circle
+                    cx={selectedPoint.x}
+                    cy={selectedPoint.y}
+                    r="3.5"
+                    fill="#7c3aed"
+                  />
+                </>
+              )}
+
+              {/* HOVER CROSSHAIR */}
+              {hover && (
+                <>
+                  <line
+                    x1={hover.x}
+                    x2={hover.x}
+                    y1={margin.top}
+                    y2={margin.top + plotHeight}
+                    stroke="#0f172a"
+                    strokeDasharray="4 4"
+                    opacity="0.35"
+                  />
+
+                  <line
+                    x1={margin.left}
+                    x2={margin.left + plotWidth}
+                    y1={hover.y}
+                    y2={hover.y}
+                    stroke="#0f172a"
+                    strokeDasharray="4 4"
+                    opacity="0.35"
+                  />
+                </>
+              )}
+            </g>
 
             <text
               x={
@@ -431,55 +528,6 @@ export default function MoodyChart({
             >
               TRANSITION
             </text>
-
-            {/* USER CALCULATION */}
-            {selectedPoint && (
-              <>
-                <line
-                  x1={selectedPoint.x}
-                  x2={selectedPoint.x}
-                  y1={margin.top}
-                  y2={
-                    margin.top +
-                    plotHeight
-                  }
-                  stroke="#7c3aed"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 5"
-                  opacity="0.7"
-                />
-
-                <line
-                  x1={margin.left}
-                  x2={
-                    margin.left +
-                    plotWidth
-                  }
-                  y1={selectedPoint.y}
-                  y2={selectedPoint.y}
-                  stroke="#7c3aed"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 5"
-                  opacity="0.7"
-                />
-
-                <circle
-                  cx={selectedPoint.x}
-                  cy={selectedPoint.y}
-                  r="9"
-                  fill="#ffffff"
-                  stroke="#7c3aed"
-                  strokeWidth="4"
-                />
-
-                <circle
-                  cx={selectedPoint.x}
-                  cy={selectedPoint.y}
-                  r="3.5"
-                  fill="#7c3aed"
-                />
-              </>
-            )}
 
             {/* AXIS LABELS */}
 
@@ -518,41 +566,15 @@ export default function MoodyChart({
             {/* HOVER CROSSHAIR */}
             {hover && (
               <>
-                <line
-                  x1={hover.x}
-                  x2={hover.x}
-                  y1={margin.top}
-                  y2={
-                    margin.top +
-                    plotHeight
-                  }
-                  stroke="#0f172a"
-                  strokeDasharray="4 4"
-                  opacity="0.35"
-                />
-
-                <line
-                  x1={margin.left}
-                  x2={
-                    margin.left +
-                    plotWidth
-                  }
-                  y1={hover.y}
-                  y2={hover.y}
-                  stroke="#0f172a"
-                  strokeDasharray="4 4"
-                  opacity="0.35"
-                />
-
                 <g
                   transform={`translate(
                     ${Math.min(
-                      hover.x + 12,
-                      width - 175
+                      Math.max(hover.x + 12, margin.left + 8),
+                      width - margin.right - 173
                     )}
-                    ${Math.max(
-                      hover.y - 55,
-                      15
+                    ${Math.min(
+                      Math.max(hover.y - 55, margin.top + 8),
+                      margin.top + plotHeight - 56
                     )}
                   )`}
                 >
@@ -629,9 +651,10 @@ export default function MoodyChart({
       </div>
 
       <p className="mt-4 text-xs leading-5 text-slate-500">
-        Hover over the diagram to inspect Reynolds number and
-        friction-factor values. The highlighted point represents
-        the current calculator result.
+        Move your cursor across the diagram to inspect Reynolds number
+        and friction-factor values. The highlighted point represents
+        the current calculator result. Curves are clipped to the plotted
+        Moody-diagram range.
       </p>
     </div>
   );
