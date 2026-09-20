@@ -4,6 +4,7 @@ import {
   Waves,
   Target,
   Thermometer,
+  Gauge,
 } from "lucide-react";
 import Navbar from "../components/Navbar/Navbar";
 import ContactCTA from "../components/ContactCTA/ContactCTA";
@@ -111,6 +112,32 @@ export default function CfdTools() {
               </p>
 
               <span className="mt-7 inline-flex items-center gap-2 font-semibold text-orange-400">
+                Open tool
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </span>
+            </Link>
+
+            <Link
+              to="/prandtl-calculator"
+              className="group rounded-3xl border border-violet-400/20 bg-slate-900/70 p-8 transition hover:-translate-y-1 hover:border-violet-400/60"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-400/10 text-violet-400">
+                <Gauge size={28} />
+              </div>
+            
+              <h2 className="mt-7 text-2xl font-bold">
+                Prandtl Number Calculator
+              </h2>
+            
+              <p className="mt-3 leading-7 text-slate-400">
+                Calculate Prandtl number from viscosity, specific heat and thermal
+                conductivity, with thermal and momentum diffusivity results.
+              </p>
+            
+              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-violet-400">
                 Open tool
                 <ArrowRight
                   size={18}
