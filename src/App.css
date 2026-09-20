@@ -234,39 +234,65 @@
 
 .engineering-tools-window {
   position: relative;
+  display: block;
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
 }
 
+/* The moving strip */
 .engineering-tools-track {
-  display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
-  min-width: max-content;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+
+  width: max-content !important;
+  max-width: none !important;
+  min-width: max-content !important;
+
+  align-items: stretch;
+  justify-content: flex-start;
+
   will-change: transform;
   animation: engineeringToolsScroll 30s linear infinite;
 }
 
-.engineering-tools-track:hover {
+/* Pause when mouse is over carousel */
+.engineering-tools-window:hover .engineering-tools-track {
   animation-play-state: paused;
 }
 
+/* Each repeated group */
 .engineering-tools-group {
-  display: flex;
-  flex: 0 0 auto;
-  flex-wrap: nowrap;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+
+  flex: 0 0 auto !important;
+  width: max-content !important;
+  min-width: max-content !important;
+
+  align-items: stretch;
   gap: 16px;
+
   padding-right: 16px;
 }
 
+/* Individual cards */
 .engineering-tool-card {
-  display: flex;
-  flex: 0 0 360px;
-  width: 360px;
-  min-width: 360px;
+  display: flex !important;
+  flex-direction: row !important;
+
+  flex: 0 0 360px !important;
+  width: 360px !important;
+  min-width: 360px !important;
+  max-width: 360px !important;
+
   min-height: 118px;
+
   align-items: center;
   gap: 16px;
+
   box-sizing: border-box;
 
   border-width: 1px;
@@ -274,7 +300,11 @@
   border-radius: 16px;
 
   padding: 16px;
+  margin: 0;
+
   text-align: left;
+
+  white-space: normal;
 
   transition:
     transform 0.25s ease,
@@ -288,40 +318,57 @@
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
 }
 
-/*
-  The Friction Factor calculator renders two identical
-  engineering-tool groups.
+/* =========================================================
+   Seamless infinite movement
+   Two identical groups = move exactly 50%
+   ========================================================= */
 
-  Moving the track by 50% therefore creates a seamless loop.
-*/
 @keyframes engineeringToolsScroll {
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform: translateX(-50%);
   }
 }
 
-/* Tablet / mobile */
+/* =========================================================
+   Tablet
+   ========================================================= */
+
 @media (max-width: 768px) {
   .engineering-tools-track {
     animation-duration: 24s;
   }
 
   .engineering-tool-card {
-    flex-basis: 300px;
-    width: 300px;
-    min-width: 300px;
+    flex-basis: 300px !important;
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
   }
 }
 
-/* Very small screens */
+/* =========================================================
+   Mobile
+   ========================================================= */
+
 @media (max-width: 480px) {
   .engineering-tool-card {
-    flex-basis: 285px;
-    width: 285px;
-    min-width: 285px;
+    flex-basis: 285px !important;
+    width: 285px !important;
+    min-width: 285px !important;
+    max-width: 285px !important;
+  }
+}
+
+/* =========================================================
+   Accessibility
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .engineering-tools-track {
+    animation: none;
   }
 }
