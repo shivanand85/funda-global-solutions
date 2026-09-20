@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { Activity, AlertTriangle, CheckCircle2, Download, FileText, Gauge, Info, Layers3, RotateCcw, Settings2, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
+import ContactCTA from "../components/ContactCTA/ContactCTA";
+import Footer from "../components/Footer/Footer";
 
 const PRESETS = {
   air: { name: "Air", density: 1.225, viscosity: 1.789e-5 },
@@ -225,7 +228,11 @@ export default function YPlusCalculator() {
     setResult(null); setErrors([]);
   };
 
-  return <main className="min-h-screen bg-slate-50 pb-20 pt-24 text-slate-900">
+  return (
+    <>
+      <Navbar />
+
+      <main className="min-h-screen bg-slate-50 pb-20 pt-24 text-slate-900">
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -297,6 +304,11 @@ export default function YPlusCalculator() {
       </div>
 
       <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-xs leading-5 text-amber-900"><strong>Engineering limitation:</strong> actual Y+ depends on local wall shear stress from the converged CFD solution. Verify surface Y+, inflation quality, mesh independence and the selected turbulence-model wall treatment.</div>
-    </div>
-  </main>;
+      </div>
+      </main>
+
+      <ContactCTA />
+      <Footer />
+    </>
+  );
 }
