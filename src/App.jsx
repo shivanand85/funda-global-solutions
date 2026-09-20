@@ -18,6 +18,8 @@ import PrandtlCalculator from "./pages/PrandtlCalculator";
 import PrandtlEngineeringReport from "./pages/PrandtlEngineeringReport";
 import FrictionFactorCalculator from "./pages/FrictionFactorCalculator";
 import FrictionFactorEngineeringReport from "./pages/FrictionFactorEngineeringReport";
+import ReynoldsCalculator from "./pages/ReynoldsCalculator";
+import ReynoldsEngineeringReport from "./pages/ReynoldsEngineeringReport";
 
 
 function App() {
@@ -42,6 +44,8 @@ function App() {
         <Route path="/prandtl-engineering-report" element={<PrandtlEngineeringReport />} />
         <Route path="/friction-factor-calculator" element={<FrictionFactorCalculator />} />
         <Route path="/friction-factor-engineering-report" element={<FrictionFactorEngineeringReport />} />
+        <Route path="/reynolds-calculator" element={<ReynoldsCalculator />} />
+        <Route path="/reynolds-engineering-report" element={<ReynoldsEngineeringReport />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>
