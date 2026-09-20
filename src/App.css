@@ -246,10 +246,6 @@
   animation: engineeringToolsScroll 30s linear infinite;
 }
 
-.engineering-tools-track:hover {
-  animation-play-state: paused;
-}
-
 .engineering-tools-group {
   display: flex;
   flex: 0 0 auto;
@@ -263,29 +259,9 @@
   flex: 0 0 360px;
   width: 360px;
   min-height: 118px;
-  align-items: center;
-  gap: 16px;
-  border-width: 1px;
-  border-radius: 16px;
-  padding: 16px;
-  text-align: left;
-  box-sizing: border-box;
-
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background-color 0.25s ease,
-    box-shadow 0.25s ease;
+  ...
 }
 
-.engineering-tool-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-}
-
-/* IMPORTANT:
-   Move exactly one complete group.
-*/
 @keyframes engineeringToolsScroll {
   from {
     transform: translate3d(0, 0, 0);
@@ -293,22 +269,5 @@
 
   to {
     transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@media (max-width: 768px) {
-  .engineering-tools-track {
-    animation-duration: 24s;
-  }
-
-  .engineering-tool-card {
-    flex-basis: 300px;
-    width: 300px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .engineering-tools-track {
-    animation: none;
   }
 }
