@@ -3,6 +3,7 @@ import {
   ArrowRight,
   Waves,
   Target,
+  Thermometer,
 } from "lucide-react";
 import Navbar from "../components/Navbar/Navbar";
 import ContactCTA from "../components/ContactCTA/ContactCTA";
@@ -90,6 +91,34 @@ export default function CfdTools() {
               </span>
             </Link>
 
+            {/* Nusselt Number Calculator */}
+            <Link
+              to="/nusselt-calculator"
+              className="group rounded-3xl border border-orange-400/20 bg-slate-900/70 p-8 transition hover:-translate-y-1 hover:border-orange-400/60"
+            >
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-400/10 text-orange-400">
+                <Thermometer size={28} />
+              </div>
+
+              <h2 className="mt-7 text-2xl font-bold">
+                Nusselt Number Calculator
+              </h2>
+
+              <p className="mt-3 leading-7 text-slate-400">
+                Calculate Nusselt number and convective heat-transfer
+                coefficient for internal and external flow using established
+                engineering correlations.
+              </p>
+
+              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-orange-400">
+                Open tool
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </span>
+            </Link>
+
           </section>
 
           {/* Engineering support message */}
@@ -97,14 +126,17 @@ export default function CfdTools() {
             <p className="text-xs font-bold uppercase tracking-[.22em] text-cyan-400">
               Engineering support
             </p>
+
             <h2 className="mt-3 text-2xl font-black sm:text-3xl">
               Need more than a calculator?
             </h2>
+
             <p className="mt-3 max-w-3xl leading-7 text-slate-400">
               Funda Global Solutions provides CFD, FEA, CAD, MATLAB, Python
               automation and AI-powered engineering solutions for students,
               researchers and industry projects.
             </p>
+
             <Link
               to="/contact"
               className="mt-6 inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 font-bold text-white transition hover:bg-cyan-400"
@@ -113,6 +145,7 @@ export default function CfdTools() {
               <ArrowRight size={18} />
             </Link>
           </section>
+
         </div>
       </main>
 
