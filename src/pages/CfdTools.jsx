@@ -5,6 +5,7 @@ import {
   Target,
   Thermometer,
   Gauge,
+  Workflow,
 } from "lucide-react";
 import Navbar from "../components/Navbar/Navbar";
 import ContactCTA from "../components/ContactCTA/ContactCTA";
@@ -33,6 +34,27 @@ export default function CfdTools() {
               design and CFD mesh planning.
             </p>
           </div>
+
+          {/* Pre-CFD Setup Assistant */}
+          <Link
+            to="/pre-cfd-setup"
+            className="group mb-6 block rounded-3xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500/10 via-slate-900/90 to-blue-500/10 p-8 transition hover:-translate-y-1 hover:border-cyan-300/80"
+          >
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-400/10 text-cyan-400">
+                  <Workflow size={28} />
+                </div>
+                <h2 className="mt-6 text-2xl font-black">Pre-CFD Setup Assistant</h2>
+                <p className="mt-3 max-w-3xl leading-7 text-slate-400">
+                  Connect Reynolds, friction factor, Prandtl, Nusselt, Y+ and transient calculations into one preliminary CFD setup workflow.
+                </p>
+              </div>
+              <span className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 font-bold text-white">
+                Try assistant <ArrowRight size={18} />
+              </span>
+            </div>
+          </Link>
 
           {/* Tools */}
           <section className="mt-12 grid gap-6 md:grid-cols-2">
