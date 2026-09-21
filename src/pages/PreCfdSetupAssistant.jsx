@@ -42,12 +42,12 @@ const defaultForm = {
 function Field({ label, value, onChange, unit, step = "any", min = "0", help }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-semibold text-slate-700">{label}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-slate-300">{label}</span>
       <div className="flex overflow-hidden rounded-xl border border-slate-300 bg-white focus-within:border-cyan-500">
         <input value={value} onChange={e => onChange(e.target.value)} type="number" min={min} step={step} className="min-w-0 flex-1 bg-transparent px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400" />
         {unit && <span className="border-l border-slate-200 px-3 py-2.5 text-xs text-slate-500">{unit}</span>}
       </div>
-      {help && <span className="mt-1 block text-xs text-slate-500">{help}</span>}
+      {help && <span className="mt-1 block text-xs text-slate-400">{help}</span>}
     </label>
   );
 }
@@ -55,11 +55,11 @@ function Field({ label, value, onChange, unit, step = "any", min = "0", help }) 
 function SelectField({ label, value, onChange, children, help }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-semibold text-slate-700">{label}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-slate-300">{label}</span>
       <select value={value} onChange={e => onChange(e.target.value)} className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-cyan-500">
         {children}
       </select>
-      {help && <span className="mt-1 block text-xs text-slate-500">{help}</span>}
+      {help && <span className="mt-1 block text-xs text-slate-400">{help}</span>}
     </label>
   );
 }
