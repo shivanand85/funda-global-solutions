@@ -20,6 +20,7 @@ import FrictionFactorCalculator from "./pages/FrictionFactorCalculator";
 import FrictionFactorEngineeringReport from "./pages/FrictionFactorEngineeringReport";
 import ReynoldsCalculator from "./pages/ReynoldsCalculator";
 import ReynoldsEngineeringReport from "./pages/ReynoldsEngineeringReport";
+import PreCfdSetupAssistant from "./pages/PreCfdSetupAssistant";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/resources" element={<Resources />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cfd-tools" element={<CfdTools />} />
+        <Route path="/pre-cfd-setup" element={<PreCfdSetupAssistant />} />
         <Route path="/cfd-calculator" element={<CfdCalculator />} />
         <Route path="/engineering-report" element={<EngineeringReportGenerator />} />
         <Route path="/yplus-calculator" element={<YPlusCalculator />} />
